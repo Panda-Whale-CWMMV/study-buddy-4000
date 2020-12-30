@@ -8,11 +8,12 @@ import MainContainer from "./MainContainer";
 import Sidebar from "./Sidebar";
 import { AppContext } from "./ContextProvider";
 
+// class creator for App
 class App extends Component {
+  // constructor and super since we are creating state in this component
   constructor(props) {
     super(props);
-
-
+// 
     this.setCurrentUser = (user) => {
       this.setState(state => ({
         user: user,
@@ -23,6 +24,7 @@ class App extends Component {
         currentSchool_id: school_id,
       }));
     };
+    
     this.setCurrentClass_id = (class_id) => {
       this.setState(state => ({
         currentClass_id: class_id,
@@ -50,14 +52,17 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+      // helps us pass down props without prop drilling
+      // we have our state maintained in ContextProvider.js
         <AppContext.Provider value={this.state}>
           <div className="header">
             <img className = "logo" src="/owl.png"/>
             <h1>Study Buddy Finder</h1>
-            
           </div>
           <Switch>
+          // exact path means that the page will only render with that path and not also with things like "/whatever"
             <Route exact path="/" component={Login} />
+            // similiar to above but you dont technically need exact here, just need that on "/" because of other landings
             <Route exact path="/signup" component={Signup} />
 
             <Route path="/homepage">
