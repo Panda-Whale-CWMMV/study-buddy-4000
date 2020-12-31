@@ -12,7 +12,9 @@ import { ClassContext } from './ClassProvider';
 
 
 
-export default function Homepage() {
+export default function Homepage(
+  
+) {
   let match = useRouteMatch();
   return (
     <div className="main_container">
