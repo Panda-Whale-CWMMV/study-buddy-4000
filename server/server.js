@@ -52,6 +52,8 @@ app.use("/api", apiRouter);
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+
 //google OAuth
 app.get('/failed', (req, res) => res.send('You failed to log in!'));
 app.get('/good', isLoggedIn, (req, res) => res.send(`Welcome ${req.user.displayName}!`));
