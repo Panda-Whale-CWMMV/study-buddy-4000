@@ -28,22 +28,41 @@ class App extends Component {
         currentClass_id: class_id,
       }));
     };
+    
     this.setCurrentEvent_id = (event_id) => {
       this.setState(state => ({
         currentEvent_id: event_id,
       }));
     };
+    
+    this.setSchools = (schoolData) => {
+      this.setState(state => ({
+        schools: schoolData,
+      }));
+    }
+
+    this.setClasses = (classData) => {
+      this.setState(state => ({
+        classes: classData,
+      }));
+    }
+
+    
+    
 
     this.state = {
       user: {},
       currentSchool_id: "1",
       currentClass_id: "1",
       currentEvent_id: "1",
+      schools: [],
+      classes: [],
       setCurrentUser: this.setCurrentUser,
       setCurrentSchool_id: this.setCurrentSchool_id,
       setCurrentClass_id: this.setCurrentClass_id,
       setCurrentEvent_id: this.setCurrentEvent_id,
-      
+      setSchools: this.setSchools,
+      setClasses: this.setClasses,
     };
   }
 
@@ -59,10 +78,11 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
-
-            <Route path="/homepage">
+            {/* homepage route includes the Navbar, Sidebar and MainContainer components */}
+            <Route path= "/homepage">
               <Navbar />
               <div className="container">
+                
                 <Sidebar />
                 <MainContainer />
               </div>

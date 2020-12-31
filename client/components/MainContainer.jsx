@@ -8,6 +8,9 @@ import EventProfile from "./EventProfile.jsx";
 import SchoolLanding from "./SchoolLanding.jsx";
 import CreateClass from "./CreateClass"
 import CreateSchool from "./CreateSchool"
+import { ClassContext } from './ClassProvider';
+
+
 
 export default function Homepage() {
   let match = useRouteMatch();
@@ -26,6 +29,7 @@ export default function Homepage() {
         <Route path={`${match.path}/schoollanding`}>
           <SchoolLanding />
         </Route>
+        {/* FIXME Duplicate component routes */}
         <Route path={`${match.path}/eventlanding/createevent`}>
           <CreateEvent />
         </Route>

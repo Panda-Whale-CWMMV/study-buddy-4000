@@ -4,6 +4,7 @@ import { Link, useRouteMatch, useParams } from "react-router-dom";
 export default function Navbar() {
   let match = useRouteMatch();
   return (
+    console.log("MATCH", match),
     <nav className="navbar_container">
       <button className="navbar_item">
         <Link className="navbar_link" to={`${match.path}/`}>Home</Link>

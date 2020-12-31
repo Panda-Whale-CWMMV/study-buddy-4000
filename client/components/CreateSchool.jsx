@@ -4,7 +4,7 @@ import { AppContext } from "./ContextProvider";
 import axios from "axios";
 
 function CreateSchool() {
-  const { currentSchool_id } = useContext(AppContext);
+  const { setSchools } = useContext(AppContext);
 
   const onSubmit = (values) => {
     const data = {
@@ -14,7 +14,11 @@ function CreateSchool() {
 
     axios
       .post("http://localhost:3000/api/schools", data)
-      .then((res) => console.log(res));
+      .then((res) => console.log(res))
+      .then(() => {
+        axios("http://localhost:3000/api/schools")
+        .then((res) => setSchools(res.data))
+      })
   };
 
   const { register, handleSubmit } = useForm();

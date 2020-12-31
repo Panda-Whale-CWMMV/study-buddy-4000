@@ -2,22 +2,30 @@ import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import { AppContext } from "./ContextProvider";
-
 function Sidebar() {
   let match = useRouteMatch();
-  const [schools, setSchools] = useState([]);
-  const [classes, setClasses] = useState([]);
+  // const [schools, setSchools] = useState([]);
+  // const [classes, setClasses] = useState([]);
+  // replacing above hook declaration with useContext deconstructor
+  
+  // const classObject = {classes, setClasses}
+  
   const {
     currentSchool_id,
     currentClass_id,
+    schools,
+    classes,
     setCurrentSchool_id,
     setCurrentClass_id,
+    setSchools,
+    setClasses,
   } = useContext(AppContext);
 
+
+
   useEffect(() => {
-    axios("http://localhost:3000/api/schools").then((res) =>
-      setSchools(res.data)
-    );
+    axios("http://localhost:3000/api/schools")
+    .then((res) => setSchools(res.data))
   }, []);
 
   function selectSchool(school_id) {
@@ -26,6 +34,9 @@ function Sidebar() {
       setClasses(res.data)
     );
   }
+
+  console.log("THESE ARE THE CLASSES",classes)  
+
 
   return (
     <div className="sidebar_container">
@@ -83,6 +94,7 @@ function Sidebar() {
           );
         })}
 
+      
         <Link
           className="sidebar_link"
           to={`${match.path}/createclass`}
