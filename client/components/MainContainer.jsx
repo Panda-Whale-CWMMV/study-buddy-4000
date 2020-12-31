@@ -8,7 +8,7 @@ import EventProfile from "./EventProfile.jsx";
 import SchoolLanding from "./SchoolLanding.jsx";
 import CreateClass from "./CreateClass"
 import CreateSchool from "./CreateSchool"
-
+// this is the homepage react component, may need to become a class Homepage extends React.Component
 export default function Homepage() {
   let match = useRouteMatch();
   return (
