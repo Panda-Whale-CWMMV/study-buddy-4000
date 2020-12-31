@@ -1,10 +1,17 @@
 import React, { Component, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AppContext } from "./ContextProvider";
+import { ClassContext } from './ClassProvider';
 import axios from "axios";
+import { useRouteMatch } from "react-router-dom";
 
-function CreateClass() {
-  const { currentSchool_id } = useContext(AppContext);
+function CreateClass(props) {
+  const { 
+    currentSchool_id,
+    setClasses,
+   } = useContext(AppContext);
+  // TODO deconstructing ClassContext hooks
+
 
   const onSubmit = (values) => {
     const data = {
@@ -15,8 +22,16 @@ function CreateClass() {
 
     axios
       .post("http://localhost:3000/api/classes", data)
-      .then((res) => console.log(res));
-  };
+      .then((res) => console.log("Class Added!", res))
+      .then(() => {
+        const query = currentSchool_id;
+        axios("http://localhost:3000/api/classes/school/" + query)
+        .then(res => setClasses(res.data))
+      })
+  }
+
+  
+
 
   const { register, handleSubmit } = useForm();
 

@@ -7,7 +7,7 @@ const usersController = {};
 usersController.createUser = (req, res, next) => {
   const params = [req.body.first_name, req.body.last_name, req.body.user_name, req.body.user_password, req.body.user_email, req.body.user_location];
   const queryText =
-    "INSERT INTO public.users (first_name, last_name, user_name, user_password, user_email, user_location) VALUES ($1, $2, $3, $4, $5, $6);";
+    "INSERT INTO public.users IF NOT EXISTS (first_name, last_name, user_name, user_password, user_email, user_location) VALUES ($1, $2, $3, $4, $5, $6);";
 
   db.query(queryText, params)
     .then((res) => next())
@@ -56,9 +56,23 @@ usersController.userAuth = (req, res, next) => {
 
 //update
 usersController.updateUserName = (req, res, next) => {
-  const params = [req.body.user_name, req.params.user_id];
+  console.log(req)
+  const params = [
+    req.params.user_id,
+    req.body.user_name, 
+    req.body.first_name,
+    req.body.user_location,
+    req.body.user_email,
+    // req.params.bio, -- WOULD HAVE TO UPDATE DATABASE
+  ];
+  console.log("params", params);
   const queryText =
-    "UPDATE public.users SET user_name = $1 WHERE  user_id = $2;";
+    `UPDATE public.users 
+      SET user_name = $2,
+      first_name = $3,
+      user_location = $4,
+      user_email = $5
+      WHERE user_id = $1;`;
   db.query(queryText, params)
     .then((result) => {
       res.locals.users = result.rows;

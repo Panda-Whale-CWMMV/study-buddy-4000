@@ -8,6 +8,8 @@ export default function EventProfile(props) {
   const [eventInfo, setEventInfo] = useState([""]);
   const [classInfo, setClassInfo] = useState([""]);
   const [usersInfo, setUsersInfo] = useState([""]);
+  // adding state in order to change button className upon clicking the subscribe button
+  const [eventSubscribe, setEventSubcribe] = useState(false);
 
   useEffect(() => {
     axios
@@ -49,6 +51,7 @@ export default function EventProfile(props) {
   }, [usersInfo.join(",")]);
 
   const subscribeToEvent = (user_id, event_id) => {
+    setEventSubcribe(true);
     axios({
       method: "POST",
       url: "http://localhost:3000/api/eventsub",
@@ -76,7 +79,12 @@ export default function EventProfile(props) {
         <p>Time: 8 pm</p>
         <p>Capacity: 35</p>
         <p>Host: Codesmith</p>
-        <button className = "generic_button" onClick = {()=>{subscribeToEvent(user.user_id, currentEvent_id)}}>Subscribe to event</button>
+        <button 
+          // dynamic className will change button style to green upon subscribing
+          className={eventSubscribe ? "generic_button_onClick" : "generic_button"} 
+          onClick = {()=>{subscribeToEvent(user.user_id, currentEvent_id)}}>
+        Subscribe to event
+        </button>
       </div>
       <div className="item2">
         <div>

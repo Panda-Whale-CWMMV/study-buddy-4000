@@ -6,8 +6,10 @@ import { AppContext } from "./ContextProvider";
 
 function Classinfo(props) {
   const { currentClass_id, user } = useContext(AppContext);
+  const [classSubscribe, setClassSubcribe] = useState(false);
 
   const subscribeToClass = (user_id, class_id) => {
+    setClassSubcribe(true);
     axios({
       method: "POST",
       url: "http://localhost:3000/api/classsub",
@@ -26,7 +28,12 @@ function Classinfo(props) {
         <div className="classItem"> Subject : {props.subject} </div>
       </div>
       <div className="classItem">Description: A great class</div>
-      <button className = "generic_button" onClick={() => {subscribeToClass(user.user_id, currentClass_id)}}>Subcribe to Class</button>
+      <button 
+        // dynamic className will change button style to green upon subscribing
+        className={classSubscribe ? "generic_button_onClick" : "generic_button"}
+        onClick={() => {subscribeToClass(user.user_id, currentClass_id)}}>
+        Subcribe to Class
+      </button>
     </div>
   );
 }

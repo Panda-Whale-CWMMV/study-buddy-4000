@@ -5,7 +5,6 @@ import axios from "axios";
 
 function CreateEvent() {
   const { currentClass_id } = useContext(AppContext);
-
   const onSubmit = (values) => {
     const data = {
       event_name: values.event_name,

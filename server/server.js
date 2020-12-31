@@ -4,6 +4,7 @@ const path = require("path");
 const apiRouter = require("./routes/api.js");
 const PORT = 3000;
 const cors = require('cors');
+const morgan = require('morgan')
 
 
 
@@ -27,6 +28,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+
+// HTTP logger
+app.use(morgan('tiny'));
 
 //catch all
 app.use((req, res) => res.sendStatus(404));
