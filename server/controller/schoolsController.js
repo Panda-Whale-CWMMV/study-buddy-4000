@@ -33,6 +33,7 @@ schoolsController.getAllSchools = (req, res, next) => {
   //promise based syntax
   db.query(queryText)
     .then((result) => {
+      // console.log(result)
       res.locals.schools = result.rows;
       return next();
     })
