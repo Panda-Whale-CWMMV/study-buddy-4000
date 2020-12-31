@@ -15,6 +15,7 @@ function EventLanding() {
 
   const [eventInfo, setEventInfo] = useState([]);
   const [classinfo, setClassInfo] = useState([]);
+  
 
   //useEffect to update state and fetch data
   //render event list
@@ -78,7 +79,11 @@ function EventLanding() {
           to={`${match.path}/createevent`}
           key={Math.random() * 1000}
         >
-          <button className="generic_button">Create New Event</button>
+          <button 
+            // dynamic className will change button style to green upon subscribing
+            className="generic_button">
+            Create New Event
+          </button>
         </Link>
       </div>
     </div>

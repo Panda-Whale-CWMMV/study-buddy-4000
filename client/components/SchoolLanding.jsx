@@ -6,6 +6,8 @@ import { AppContext } from "./ContextProvider";
 function SchoolLanding() {
   const { currentSchool_id, user } = useContext(AppContext);
   const [school, setSchool] = useState({ school_id: "" });
+  // adding state in order to change button className upon clicking the subscribe button
+  const [schoolSubscribe, setSchoolSubcribe] = useState(false);
 
   useEffect(() => {
     axios(`http://localhost:3000/api/schools/${currentSchool_id}`).then(
@@ -17,6 +19,7 @@ function SchoolLanding() {
   }, [currentSchool_id]);
 
   const subscribeToSchool = (school_id, user_id) => {
+    setSchoolSubcribe(true);
     axios({
       method: "POST",
       url: "http://localhost:3000/api/schoolsub",
@@ -34,7 +37,8 @@ function SchoolLanding() {
         <p>Welcome to {school.school_name}</p>
         <p>Location: {school.school_location}</p>
         <button
-          className="generic_button"
+        // dynamic className will change button style to green upon subscribing
+          className={schoolSubscribe ? "generic_button_onClick" : "generic_button"}
           onClick={() => {
             subscribeToSchool(user.user_id, currentSchool_id);
           }}
