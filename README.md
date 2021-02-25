@@ -1,9 +1,6 @@
 # study-buddy-4000
 
-# A study tool connecting students to study groups within similar classes, programs and schools
-
-
-# Contributing
+### Contributing
 
 While we view this as a 'concept app', we encourage contributions and welcome all pull requests.
 
